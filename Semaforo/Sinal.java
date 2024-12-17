@@ -15,6 +15,7 @@ public class Sinal implements Runnable
 		new Thread(this).start();
 	}
 
+
 	@Override
 	public void run() 
     {
@@ -30,6 +31,7 @@ public class Sinal implements Runnable
 			}
 		}
 	}
+
 	
 	private synchronized void mudarCor()
     {
@@ -55,8 +57,7 @@ public class Sinal implements Runnable
     {
 		while(!this.mudouCor)
         {
-			try 
-            {
+			try{
 				wait();
 			} 
             catch (InterruptedException e) {
@@ -65,6 +66,8 @@ public class Sinal implements Runnable
 		}
 		this.mudouCor = false;
 	}
+
+
 	
 	public synchronized void desligarSemafaro(){
 		this.shouldStop = true;

@@ -2,27 +2,27 @@ package Threads.TiqueTaque;
 
 public class Logic_TiqueTaque 
 {
-	boolean shouldTick;
+	boolean shouldTique;
 
 	synchronized void tique(boolean isPlayingTique)
     {
-		if (isPlayingTique == false)
+		if (!isPlayingTique)
         {
-			shouldTick = true;
-			notify();
+			shouldTique = true;
+			notify(); // notifies the other Thread
 			return; //Stops execution
 		}
 
 		System.out.print("Tique ");
 
-		shouldTick = true;
+		shouldTique = true;
 
 		notify(); // Taque can be executed now
 
 		try 
         {
-			while (shouldTick){
-				wait();
+			while (shouldTique){
+				wait(); // so that Taque can be run and turn shouldTique into false
 			}
 		} 
         catch (InterruptedException e) {
@@ -32,22 +32,22 @@ public class Logic_TiqueTaque
 	
 	synchronized void taque(boolean isPlayingTaque)
     {
-		if (isPlayingTaque == false)
+		if (!isPlayingTaque)
         {
-			shouldTick = false;
+			shouldTique = false;
 			notify();
 			return; //Stops execution
 		}
 
 		System.out.println("Taque");
 
-		shouldTick = false;
+		shouldTique = false;
 
 		notify(); // Tique can be executed now
 
 		try 
         {
-			while (shouldTick == false){
+			while (!shouldTique){
 				wait();
 			}
 		} 

@@ -23,7 +23,7 @@ public class Deadlock
 						e.printStackTrace();
 					}
 					
-					System.out.println("Thread #1: tendando o acesso ao recurso 2");
+					System.out.println("Thread #1: tentando o acesso ao recurso 2");
 					
 					synchronized (RECURSO_2) {
 						System.out.println("Thread #1: bloqueou recurso 2");

@@ -10,13 +10,14 @@ public class CtrlThread implements Runnable
 	{
 		this.nome = nome;
 		this.isSuspended = false;
+
 		new Thread(this, nome).start();
 	}
 
 	@Override
 	public void run() 
 	{
-		System.out.println("\nExecutando " + this.nome);
+		System.out.println("\n------------Executando " + this.nome +  " -----------");
 
 		try 
 		{
@@ -25,6 +26,7 @@ public class CtrlThread implements Runnable
 				System.out.println("Thread " + nome + ", " + " indice " + i);
 				Thread.sleep(300);
 
+				//cuz wait(), notify()... requires synchronized methods/blocks
 				synchronized (this) 
 				{
 					while (isSuspended){
@@ -40,19 +42,21 @@ public class CtrlThread implements Runnable
 			e.printStackTrace();
 		}
 
-		System.out.println("\nThread " + this.nome + " terminada.");
+		System.out.println("-------------Thread " + this.nome + " terminada---------------\n");
 	}
 	
 	void suspend(){
 		this.isSuspended = true;
 	}
 
-	synchronized void resume(){
+	synchronized void resume()
+	{
 		this.isSuspended = false;
 		notify();
 	}
 	
-	synchronized void finish(){
+	synchronized void finish()
+	{
 		this.isFinished = true;
 		notify();
 	}

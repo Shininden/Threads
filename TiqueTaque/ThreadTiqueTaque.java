@@ -9,8 +9,9 @@ public class ThreadTiqueTaque implements Runnable
 	
 	public ThreadTiqueTaque(String nome, Logic_TiqueTaque tt)
 	{
+		this.logicTT = tt;
+
 		thread = new Thread(this, nome);
-		this.logicTT = tt;		
 		thread.start();
 	}
 

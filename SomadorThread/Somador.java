@@ -2,27 +2,24 @@ package Threads.SomadorThread;
 
 public class Somador 
 {
-	private int total;
-	
+    //Allows it to be used by more than one Thread by alternating who uses it at a certain time
 	public synchronized int somaArray(int[] array)
 	{
-		total = 0;
-		
-		for (int i = 0; i< array.length; i++) 
+        int total = 0;
+
+        for (int j : array)
 		{
-			total += array[i];
+            total += j;
 
-			System.out.println("Executando a soma da " + Thread.currentThread().getName() + " "
-					 + array[i] +  " + " + total);
-
-			try 
+            try
 			{
-				Thread.sleep(100);
-			} 
+                Thread.sleep(300);
+				System.out.println("Executando a soma da " + Thread.currentThread().getName() + ": " + "adicionando " + j + " ao somador  (valor do somador agora: " + total + ")");
+            }
 			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+                e.printStackTrace();
+            }
+        }
 		return total;
 	}
 }
